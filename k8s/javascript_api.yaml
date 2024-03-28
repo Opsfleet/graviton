@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javascript-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: javascript-api
+  template:
+    metadata:
+      labels:
+        app: javascript-api
+    spec:
+      containers:
+      - name: javascript-api
+        image: AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/javascript_api:<IMAGE_TAG>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 3000
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app: javascript-api
+        maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: javascript-api
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: javascript-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javascript-api
+spec:
+  selector:
+    app: javascript-api
+  ports:
+  - port: 3000
+    targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: javascript-api
+  labels:
+    name: javascript-api
+spec:
+  ingressClassName: kong
+  rules:
+  - host: ""
+    http:
+      paths:
+      - pathType: Exact
+        path: "/js/getarch"
+        backend:
+          service:
+            name: javascript-api
+            port: 
+              number: 3000
+
+

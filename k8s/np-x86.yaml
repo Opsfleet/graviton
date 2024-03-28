@@ -1,0 +1,21 @@
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: np-x86
+  annotations:
+    kubernetes.io/description: "NodePool for provisioning x86 spot capacity"
+spec:
+  template:
+    spec:
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+        - key: karpenter.k8s.aws/instance-family
+          operator: In
+          values: ["t3"]
+      nodeClassRef:
+        name: default

@@ -1,0 +1,15 @@
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/KarpenterController
+
+settings:
+  clusterName: graviton
+  interruptionQueue: KarpenterQueue
+
+tolerations:
+- key: "type"
+  operator: "Equal"
+  value: "core"
+  effect: "NoSchedule"
+
+logLevel: info

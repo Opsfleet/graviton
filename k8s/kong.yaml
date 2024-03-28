@@ -1,0 +1,14 @@
+controller:
+  tolerations:
+  - key: "type"
+    operator: "Equal"
+    value: "core"
+    effect: "NoSchedule"
+
+
+gateway:
+  tolerations:
+  - key: "type"
+    operator: "Equal"
+    value: "core"
+    effect: "NoSchedule"

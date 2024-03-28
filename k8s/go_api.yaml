@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-api
+  template:
+    metadata:
+      labels:
+        app: go-api
+    spec:
+      containers:
+      - name: go-api
+        image: AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/go_api:<IMAGE_TAG>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 8080
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app: go-api
+        maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: go-api
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: go-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-api
+spec:
+  selector:
+    app: go-api
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-api
+  labels:
+    name: go-api
+spec:
+  ingressClassName: kong
+  rules:
+  - host: ""
+    http:
+      paths:
+      - pathType: Exact
+        path: "/go/getarch"
+        backend:
+          service:
+            name: go-api
+            port: 
+              number: 8080
+
+
