@@ -21,6 +21,6 @@ Included in this folder is the following:
     
      `helm install kong kong/ingress -n kong --values kong.yaml --create-namespace`
 
-The reset of the files are raw Kubernetes resources that can be installed with:
+The rest of the files are raw Kubernetes resources that can be installed with:
 
 `kubectl apply -f <file_name>`

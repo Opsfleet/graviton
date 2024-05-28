@@ -12,3 +12,7 @@ gateway:
     operator: "Equal"
     value: "core"
     effect: "NoSchedule"
+  proxy:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/aws-load-balancer-name: kong

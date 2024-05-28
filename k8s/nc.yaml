@@ -7,7 +7,6 @@ spec:
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "private_subnet"
-
   securityGroupSelectorTerms:
     - name: graviton-nodes
   role: "KarpenterNodeRole"

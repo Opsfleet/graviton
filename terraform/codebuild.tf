@@ -62,7 +62,7 @@ resource "aws_iam_role" "codebuild_role" {
             "Action" : [
               "logs:CreateLogGroup"
             ],
-            "Resource" : "arn:aws:logs:*:*:log-group:codebuild"
+            "Resource" : "arn:aws:logs:*:*:log-group:codebuild:*"
           },
           {
             "Effect" : "Allow",

@@ -1,0 +1,5 @@
+tolerations:
+- key: "type"
+  operator: "Equal"
+  value: "core"
+  effect: "NoSchedule"

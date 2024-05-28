@@ -1,13 +1,14 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
+      version = "5.51.1"
     }
   }
 }
 
 provider "aws" {
-  profile = "opsfleet"
+  region = "eu-west-1"
   default_tags {
     tags = {
       Project = "graviton"
