@@ -18,8 +18,7 @@ This directory contains the necessary configuration files for setting up Karpent
     helm install kong kong/ingress -n kong --values kong.yaml --create-namespace
     ```
 
-The remaining files in this directory are raw Kubernetes resources that can be installed directly into your cluster.
-
+- The remaining files in this directory are raw Kubernetes resources that can be installed directly into your cluster.
     ```bash
     kubectl apply -f <file_name>
     ```
