@@ -1,10 +1,25 @@
-# Terraform
+# Terraform Infrastructure for Demo
 
-This Terraform code will deploy all the necesary infrastructure needed to run the demo:
+This repository contains Terraform manifests that are designed to deploy all the necessary infrastructure required to run the demo. The infrastructure can be deployed using either Terraform or OpenTofu.
 
-This can be run with either Terraform or OpenTofu
+## Infrastructure Components
 
-- VPC, Subnets, etc
-- IAM roles and permissions
-- CodeCommit, CodeBuild and CodePipeline
-- EKS Cluster and core managed nodegroup
+The following components will be set up by these manifests:
+
+- **VPC, Subnets, etc:** The manifests will set up a Virtual Private Cloud (VPC) with the necessary subnets for your resources.
+
+- **IAM roles and permissions:** The manifests will create the necessary IAM roles and assign the appropriate permissions to these roles.
+
+- **CodeCommit, CodeBuild, and CodePipeline:** The manifests will set up a CodeCommit repository, a CodeBuild project for building your code, and a CodePipeline for continuous integration and continuous deployment (CI/CD).
+
+- **EKS Cluster and core managed nodegroup:** The manifests will set up an Amazon EKS cluster along with a core managed nodegroup.
+
+## Usage
+
+To deploy the infrastructure, follow these steps:
+
+1. Clone this repository.
+2. Navigate to the repository directory.
+3. Apply the Terraform manifests using either Terraform or OpenTofu.
+
+Please refer to the individual manifest files for more detailed instructions.

@@ -1,26 +1,25 @@
-# k8s
+# Kubernetes Configuration for Karpenter and Kong Ingress Controller
 
-### Please ensure to replace <AWS_ACCOUNT_ID> with your actual account ID before applying to your cluster.
-### Please ensure to replace <IMAGE_TAG> with the relevant image tag before applying to your cluster.
+This directory contains the necessary configuration files for setting up Karpenter and the Kong Ingress Controller in a Kubernetes cluster.
 
-Included in this folder is the following:
+**Note:** Before applying these configurations to your cluster, replace `<AWS_ACCOUNT_ID>` and `<IMAGE_TAG>` with your actual AWS account ID and the relevant image tag, respectively.
 
-- `karpenter.yaml`
+## Included Files
 
-    This includes the values needed to install Karpenter correctly.
-    
-    You can install the helm chart using 
-    
-    `helm install karpenter oci://public.ecr.aws/karpenter/karpenter -n karpenter --values karpenter.yaml --create-namespace`
+- `karpenter.yaml`: This file contains the values needed to correctly install Karpenter. Install the Helm chart using the following command:
 
-- `kong.yaml`
-    
-    This includes the values needed to install the Kong Ingress Controller correctly.
+    ```bash
+    helm install karpenter oci://public.ecr.aws/karpenter/karpenter -n karpenter --values karpenter.yaml --create-namespace
+    ```
 
-    You can install the helm chart using:
-    
-     `helm install kong kong/ingress -n kong --values kong.yaml --create-namespace`
+- `kong.yaml`: This file contains the values needed to correctly install the Kong Ingress Controller. Install the Helm chart using the following command:
 
-The rest of the files are raw Kubernetes resources that can be installed with:
+    ```bash
+    helm install kong kong/ingress -n kong --values kong.yaml --create-namespace
+    ```
 
-`kubectl apply -f <file_name>`
+The remaining files in this directory are raw Kubernetes resources that can be installed directly into your cluster.
+
+    ```bash
+    kubectl apply -f <file_name>
+    ```
