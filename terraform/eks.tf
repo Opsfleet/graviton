@@ -3,7 +3,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
 
   cluster_name                   = "graviton"
-  cluster_version                = "1.29"
+  cluster_version                = "1.30"
   cluster_enabled_log_types      = []
   cluster_endpoint_public_access = true
   iam_role_name                  = "EKSClusterRole"
@@ -81,9 +81,9 @@ module "eks" {
       instance_types                  = ["t3.small"]
       ami_type                        = "BOTTLEROCKET_x86_64"
       platform                        = "bottlerocket"
-      min_size                        = 3
-      max_size                        = 3
-      desired_size                    = 3
+      min_size                        = 2
+      max_size                        = 2
+      desired_size                    = 2
       iam_role_name                   = "ClusterNodeRole"
       iam_role_use_name_prefix        = false
       use_name_prefix                 = false
